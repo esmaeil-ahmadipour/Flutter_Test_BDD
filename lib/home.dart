@@ -33,6 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
           Text(
             '$_counter',
             style: Theme.of(context).textTheme.headline4,
+            key: ValueKey('counted_number'),
           ),
         ],
       ),
@@ -41,6 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Widget buildFloatingActionButton() {
     return FloatingActionButton(
+      key: ValueKey('increment_button'),
       onPressed: _incrementCounter,
       tooltip: 'Increment',
       child: Icon(Icons.add),
