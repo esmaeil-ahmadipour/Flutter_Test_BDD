@@ -29,12 +29,28 @@ void main() {
       expect(await driver.getText(counterTextFinder), "0");
     });
 
-    test('increments the counter', () async {
-      // First, tap the button.
+
+    test('Increment the counter', () async {
+
+      // First tap , on the FAB ;
       await driver.tap(buttonFinder);
 
-      // Then, verify the counter text is incremented by 1.
+      // Then , verify text show number '1'
       expect(await driver.getText(counterTextFinder), "1");
+
+      // Second tap , on the FAB ;
+      await driver.tap(buttonFinder);
+
+      /*
+      //if uncommented  this part of code , test will be fail.
+      // verify text show number '3' but this expect is mistake , because actual number is '2'
+      expect(await driver.getText(counterTextFinder), "3");
+      */
+
+      expect(await driver.getText(counterTextFinder), "2");
+
+
     });
+
   });
 }
