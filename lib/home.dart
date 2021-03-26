@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -15,7 +16,22 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
+        key: ValueKey('app_bar'),
         title: Text(widget.title),
+        leading:  Padding(
+          padding: const EdgeInsets.all(4.0),
+          child: FlatButton(
+            padding: EdgeInsets.zero,
+            color: Colors.white,
+            shape: CircleBorder(),
+            onPressed: () => _showDialog(),
+            child: Icon(
+              Icons.mark_chat_unread_outlined,
+              color: Theme.of(context).accentColor,
+            ),
+       ),
+        ),
       ),
       body: buildBody(context),
       floatingActionButton: buildFloatingActionButton(),
@@ -28,11 +44,11 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text(
-            'You have pushed the button this many times:',
+            'A number that is set :',
           ),
           Text(
             '$_counter',
-            style: Theme.of(context).textTheme.headline4,
+            style: Theme.of(context).textTheme.headline2,
             key: ValueKey('counted_number'),
           ),
         ],
@@ -41,11 +57,25 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Widget buildFloatingActionButton() {
-    return FloatingActionButton(
-      key: ValueKey('increment_button'),
-      onPressed: _incrementCounter,
-      tooltip: 'Increment',
-      child: Icon(Icons.add),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        FloatingActionButton(
+          backgroundColor: Colors.green,
+          key: ValueKey('increment_button'),
+          onPressed: _incrementCounter,
+          tooltip: 'Increment',
+          child: Icon(Icons.keyboard_arrow_up_outlined),
+        ),
+        FloatingActionButton(
+          backgroundColor: Colors.red,
+          key: ValueKey('decrement_button'),
+          onPressed: _decrementCounter,
+          tooltip: 'Decrement',
+          child: Icon(Icons.keyboard_arrow_down_outlined),
+        )
+      ],
     );
   }
 
@@ -53,5 +83,36 @@ class _MyHomePageState extends State<MyHomePage> {
     setState(() {
       _counter++;
     });
+  }
+
+  void _decrementCounter() {
+    setState(() {
+      _counter--;
+    });
+  }
+
+  void _showDialog(){
+    showDialog(
+      barrierDismissible: false,
+      context:context,
+      builder:(BuildContext context){
+        return AlertDialog(
+        title: Text('Current number is : '),
+          content: Text ('Number : $_counter\n',key: ValueKey('alert_text'),),
+          actions: [FlatButton(
+            padding: EdgeInsets.zero,
+            key: ValueKey('close_button'),
+            color: Theme.of(context).accentColor,
+            splashColor: Theme.of(context).splashColor,
+            shape: CircleBorder(),
+            onPressed: () => Navigator.of(context).pop(),
+            child: Icon(
+              Icons.check,
+              color: Colors.white,
+            ),
+          ),],
+        );
+      }
+    );
   }
 }

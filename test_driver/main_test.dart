@@ -8,7 +8,10 @@ void main() {
     // test suite. Note: the Strings provided to the `byValueKey` method must
     // be the same as the Strings we used for the Keys in step 1.
     final counterTextFinder = find.byValueKey('counted_number');
-    final buttonFinder = find.byValueKey('increment_button');
+    final buttonAdd= find.byValueKey('increment_button');
+    final buttonSubtract= find.byValueKey('decrement_button');
+    final alertDialogText= find.byValueKey('alert_text');
+    final buttonClose= find.byValueKey('close_button');
 
     FlutterDriver driver;
 
@@ -33,13 +36,13 @@ void main() {
     test('Increment the counter', () async {
 
       // First tap , on the FAB ;
-      await driver.tap(buttonFinder);
+      await driver.tap(buttonAdd);
 
       // Then , verify text show number '1'
       expect(await driver.getText(counterTextFinder), "1");
 
       // Second tap , on the FAB ;
-      await driver.tap(buttonFinder);
+      await driver.tap(buttonAdd);
 
       /*
       //if uncommented  this part of code , test will be fail.
